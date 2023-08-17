@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e1ce039-3dc8-4f44-8d2f-4b1ea4fdc919" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/dataStructure/QuickSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetCode/ListNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_1To100.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MultipleThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaRelated/MultipleThreads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NormalStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Script.kt" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/BinaryTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/basic/TreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/leetCode/_100To200.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaRelated/MultipleThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javaRelated/MultipleThreads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetCode/ListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/basic/ListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetCode/_1To100.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_1To100.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +32,6 @@
   <component name="ProjectId" id="2TF3Sjv5gM12Wl7NybAFPetQiEs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
-    <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -55,7 +55,25 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="leetCode" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.QuickSort">
+    <configuration name="BinaryTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dataStructure.BinaryTree" />
+      <module name="leetCodeScript" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataStructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="leetCodeScript" />
@@ -70,15 +88,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MultipleThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="JavaRelated.MultipleThreads" />
+    <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dataStructure.QuickSort" />
       <module name="leetCodeScript" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataStructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="TestLock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="JavaRelated.TestLock" />
+      <option name="MAIN_CLASS_NAME" value="javaRelated.TestLock" />
       <module name="leetCodeScript" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -93,11 +117,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.QuickSort" />
+        <item itemvalue="Application.BinaryTree" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application._1To100" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.TestLock" />
-        <item itemvalue="Application.MultipleThreads" />
       </list>
     </recent_temporary>
   </component>
@@ -118,7 +142,7 @@
       <workItem from="1691473319265" duration="1281000" />
       <workItem from="1691818835226" duration="5658000" />
       <workItem from="1692199856095" duration="2602000" />
-      <workItem from="1692239284948" duration="23400000" />
+      <workItem from="1692239284948" duration="32018000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 package leetCode;
 
+import dataStructure.basic.ListNode;
+
 import java.util.*;
 
 class _1To100 {
@@ -189,67 +191,6 @@ class _1To100 {
         }
         return left;
     }
-
-    // 二叉树的中序遍历 ===================================
-    // 递归实现
-    public static class TreeNode {
-        int value;
-        TreeNode left;
-        TreeNode right;
-    }
-
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        inorder(root, res);
-        return res;
-    }
-
-    void inorder(TreeNode treeNode, List<Integer> res) {
-        if (treeNode == null) {
-            return;
-        }
-        inorder(treeNode.left, res);
-        res.add(treeNode.value);
-        inorder(treeNode.right, res);
-    }
-    // ========================================
-
-    // 平衡二叉树  递归判定 -------------------------------
-    public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return false;
-        } else {
-            return Math.abs(height(root.left) - height(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
-        }
-    }
-
-    public int height(TreeNode node) {
-        if (node == null) {
-            return 0;
-        } else {
-            return Math.max(height(node.left), height(node.right)) + 1;
-        }
-    }
-
-    // 160. 相交链表 [hashList，]
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
-        HashSet<ListNode> hashSet = new HashSet<>();
-
-        while (headA != null) {
-            hashSet.add(headA);
-            headA = headA.next;
-        }
-
-        while (headB != null) {
-            if (hashSet.contains(headB))
-                return headB;
-            headB = headB.next;
-        }
-        return null;
-    }
-
-    // -------------------------------
     public static void main(String[] args) {
         int i = 0;
         while (i < 3) {

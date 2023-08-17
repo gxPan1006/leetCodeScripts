@@ -1,4 +1,4 @@
-package leetCode;
+package dataStructure.basic;
 
 public class ListNode {
     public int value;

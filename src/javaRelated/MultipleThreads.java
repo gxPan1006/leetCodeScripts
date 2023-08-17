@@ -1,4 +1,4 @@
-package JavaRelated;
+package javaRelated;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
