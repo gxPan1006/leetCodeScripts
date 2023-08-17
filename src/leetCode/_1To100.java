@@ -1,23 +1,8 @@
-import lombok.Data;
+package leetCode;
 
-import javax.swing.*;
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-    }
-}
-
-class ListNode {
-    int value;
-    ListNode next;
-
-    public ListNode(int value) {
-        this.value = value;
-    }
-}
-
-class Solution {
+class _1To100 {
 
     // 1. 两数之和 [hashMap]
     public int[] twoSum(int[] nums, int target) {

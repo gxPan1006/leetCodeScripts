@@ -1,7 +1,7 @@
+package JavaRelated;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 public class MultipleThreads {
     public static void main(String[] args) throws InterruptedException {
