@@ -10,7 +10,7 @@ public class QuickSort {
 
         System.out.println(Arrays.toString(nums));
     }
-    // TODO: 快排
+    // 快排
     public static void quickSort(int[] nums, int low, int high) {
         if (low < high) {
             int mid = partition(nums, low, high);
@@ -44,7 +44,4 @@ public class QuickSort {
         nums[i] = nums[j];
         nums[j] = temp;
     }
-
-    // TODO: 堆排序
-
 }

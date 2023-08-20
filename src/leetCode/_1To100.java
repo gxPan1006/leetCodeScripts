@@ -20,6 +20,75 @@ class _1To100 {
         throw new IllegalArgumentException();
     }
 
+    // 2. 两数相加
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode ans = new ListNode(0);
+        var cur = ans;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int x = l1 != null ? l1.val : 0;
+            int y = l2 != null ? l2.val : 0;
+            cur.next = new ListNode((x + y + carry) % 10);
+            cur = cur.next;
+            carry = (x + y + carry) / 10;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        if (carry != 0) cur.next = new ListNode(carry);
+        return ans.next;
+    }
+
+    // 3. 无重复字符的最长字串
+    public int lengthOfLongestSubstring(String s) {
+        if (s.isEmpty()) return 0;
+        int i = 0;
+        int j = 1;
+        int maxLength = 1;
+        while (i < s.length() && j < s.length()) {
+            if (!s.substring(i, j).contains(s.substring(j, j + 1))) {
+                j++;
+                if (j - i > maxLength) {
+                    maxLength = j - i;
+                }
+            } else {
+                i = s.substring(i, j).indexOf(s.substring(j, j + 1)) + i + 1;
+                j++;
+            }
+        }
+        return maxLength;
+    }
+
+    // 5. 最长回文字符串
+    public static String longestPalindrome_Stupid(String s) {
+        int globalMaxLength = 1;
+        String globalMaxStr = String.valueOf(s.charAt(0));
+
+        for (int i = 0; i < s.length(); i++) {
+            int localMaxLength = 1;
+            String localMaxStr = String.valueOf(s.charAt(i));
+            StringBuilder reverseStr = new StringBuilder("");
+
+            for (int j = i + 1; j < s.length() + 1; j++) {
+                String subStr = s.substring(i, j);
+                if (subStr.contentEquals(reverseStr.replace(0, reverseStr.length(), subStr).reverse())
+                        && j - i > localMaxLength) {
+                    localMaxLength = j - i;
+                    localMaxStr = subStr;
+                }
+            }
+            if (localMaxLength > globalMaxLength) {
+                globalMaxLength = localMaxLength;
+                globalMaxStr = localMaxStr;
+            }
+        }
+        return globalMaxStr;
+    }
+
+//    public static String longestPalindrome(String s) {
+//
+//    }
+
+
     // 9. 回文数 [回文数，数学]
     public boolean isPalindrome(int x) {
         if (x < 0) return false;
@@ -107,7 +176,7 @@ class _1To100 {
             return list1;
         }
 
-        if (list1.value <= list2.value) {
+        if (list1.val <= list2.val) {
             list1.next = mergeTwoLists(list1.next, list2);
             return list1;
         } else {
@@ -122,7 +191,7 @@ class _1To100 {
         int i = 1;
         int j = 1;
         while (i < nums.length) {
-            while (nums[j] == nums[i-1]) {
+            while (nums[j] == nums[i - 1]) {
                 if (j == nums.length - 1) {
                     return i;
                 }
@@ -155,13 +224,22 @@ class _1To100 {
         return nums.length - j;
     }
 
-    // TODO: KMP算法
+    // TODO: KMP算法(先放弃了)
     // 28. 找出字符串中第一个匹配项的下标 [KMP算法]
     public int strStr(String haystack, String needle) {
         return 1;
     }
 
-    // TODO: 快速排序
+    // 70. 爬楼梯
+    public int climbStairs(int n) {
+        int[] dp = new int[46];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
 
     public int removeElement(int[] nums, int val) {
         int n = nums.length;
@@ -190,15 +268,6 @@ class _1To100 {
             }
         }
         return left;
-    }
-    public static void main(String[] args) {
-        int i = 0;
-        while (i < 3) {
-            System.out.println(i++);
-        }
-        System.out.println(i);
-
-        System.out.println(10 << 1);
     }
 }
 

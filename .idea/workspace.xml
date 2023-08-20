@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e1ce039-3dc8-4f44-8d2f-4b1ea4fdc919" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/dataStructure/BinaryTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dataStructure/basic/TreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetCode/_100To200.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/BubbleSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/InsertSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/MergeSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaRelated/MultipleThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javaRelated/MultipleThreads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/ListNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/basic/ListNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataStructure/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/QuickSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetCode/_100To200.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_100To200.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leetCode/_1To100.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_1To100.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +60,7 @@
       <recent name="leetCode" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.QuickSort">
+  <component name="RunManager" selected="Application._1To100">
     <configuration name="BinaryTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dataStructure.BinaryTree" />
       <module name="leetCodeScript" />
@@ -117,10 +117,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application._1To100" />
         <item itemvalue="Application.QuickSort" />
         <item itemvalue="Application.BinaryTree" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application._1To100" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -142,7 +142,7 @@
       <workItem from="1691473319265" duration="1281000" />
       <workItem from="1691818835226" duration="5658000" />
       <workItem from="1692199856095" duration="2602000" />
-      <workItem from="1692239284948" duration="32018000" />
+      <workItem from="1692239284948" duration="52051000" />
     </task>
     <servers />
   </component>
