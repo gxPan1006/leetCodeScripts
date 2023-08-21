@@ -1,6 +1,7 @@
 package leetCode;
 
 import dataStructure.basic.ListNode;
+import lombok.val;
 
 import java.util.*;
 
@@ -84,10 +85,34 @@ class _1To100 {
         return globalMaxStr;
     }
 
-//    public static String longestPalindrome(String s) {
-//
-//    }
-
+    public static String longestPalindrome(String s) {
+        boolean[][] dp = new boolean[1000][1000];
+        int maxLength = 1;
+        String maxStr = s.substring(0, 1);
+        for (int i = 0; i < s.length(); i++) {
+            dp[i][i] = true;
+        }
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i + 1) == s.charAt(i)) {
+                dp[i][i + 1] = true;
+                maxLength = 2;
+                maxStr = s.substring(i, i + maxLength);
+            }
+        }
+        for (int len = 3; len <= s.length(); len++) {
+            for (int i = 0; i <= s.length() - len; i++) {
+                int j = i + len - 1;
+                if (dp[i + 1][j - 1] && s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = true;
+                    if (j - i + 1 > maxLength) {
+                        maxLength = j - i + 1;
+                        maxStr = s.substring(i, j + 1);
+                    }
+                }
+            }
+        }
+        return maxStr;
+    }
 
     // 9. 回文数 [回文数，数学]
     public boolean isPalindrome(int x) {
@@ -99,6 +124,22 @@ class _1To100 {
             x = x / 10;
         }
         return sum == prev;
+    }
+
+    // 11. 盛水最多的容器
+    public int maxArea(int[] height) {
+        int i = 0;
+        int j = height.length - 1;
+        int maxArea = Math.min(height[0], height[1]);
+        while (i < j) {
+            if (Math.min(height[i], height[j]) * Math.abs(j - i) > maxArea) {
+                maxArea = Math.min(height[i], height[j]) * Math.abs(j - i);
+            }
+            if (height[i] <= height[j]) {
+                i = i + 1;
+            } else if (height[j] < height[i]) j = j - 1;
+        }
+        return maxArea;
     }
 
     // 13. 罗马数字转整数 [hashMap]
@@ -148,6 +189,14 @@ class _1To100 {
         return ans;
     }
 
+    // 15. 三数之和
+    public List<List<Integer>> threeSum(int[] nums) {
+        // 三层遍历
+        // 优化1: 三个数都往前遍历，不往后遍历，i, j=i, k=j;
+        // 优化2: 不重复，排序，进入的前提是和前一个不一样;
+        // 优化3: 用一个右指针一次性遍历，因为第二层前一个如果满足的话，后一个的第三层匹配值一定更小。
+        return new ArrayList<>();
+    }
 
     // 20. 有效的括号 [栈、hashMap]
     public boolean isValid(String s) {
