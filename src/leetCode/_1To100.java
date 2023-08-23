@@ -198,6 +198,39 @@ class _1To100 {
         return new ArrayList<>();
     }
 
+    // 17. 电话号码的字母组合
+    public List<String> letterCombinations(String digits) {
+        if (digits.isEmpty()) return new ArrayList<>();
+        HashMap<Character, Character[]> numsMap = new HashMap<>() {{
+            put('2', new Character[]{'a', 'b', 'c'});
+            put('3', new Character[]{'d', 'e', 'f'});
+            put('4', new Character[]{'g', 'h', 'i'});
+            put('5', new Character[]{'j', 'k', 'l'});
+            put('6', new Character[]{'m', 'o', 'n'});
+            put('7', new Character[]{'p', 'q', 'r', 's'});
+            put('8', new Character[]{'t', 'u', 'v'});
+            put('9', new Character[]{'w', 'x', 'y', 'z'});
+        }};
+
+        List<String> ans = new ArrayList<>();
+        int index = 0;
+        getAns(ans, index, digits, numsMap, new StringBuilder());
+        return ans;
+    }
+
+    private void getAns(List<String> ans, int index, String digits, HashMap<Character, Character[]> numsMap, StringBuilder roundAns) {
+        if (index == digits.length()) {
+            ans.add(roundAns.toString());
+        }
+        Character[] chars = numsMap.get(digits.charAt(index));
+
+        for (Character i : chars) {
+            roundAns.append(i);
+            getAns(ans, index + 1, digits, numsMap, roundAns);
+            roundAns.delete(roundAns.length() - 1, roundAns.length());
+        }
+    }
+
     // 20. 有效的括号 [栈、hashMap]
     public boolean isValid(String s) {
 //        Stack<Character> stack = new Stack<>();
@@ -231,6 +264,27 @@ class _1To100 {
         } else {
             list2.next = mergeTwoLists(list2.next, list1);
             return list2;
+        }
+    }
+
+    // 22. 括号生成
+    public List<String> generateParenthesis(int n) {
+        ArrayList<String> ans = new ArrayList<>();
+        String roundStr = "";
+        dfs(ans, n, n, roundStr);
+        return ans;
+    }
+
+    private void dfs(ArrayList<String> ans, int lb, int rb, String roundStr) {
+        if (rb == 0 && lb == 0) {
+            ans.add(roundStr);
+            return;
+        }
+        if (lb > 0) {
+            dfs(ans, lb - 1, rb, roundStr + "(");
+        }
+        if (rb > 0) {
+            dfs(ans, lb, rb - 1, roundStr + ")");
         }
     }
 
@@ -277,6 +331,54 @@ class _1To100 {
     // 28. 找出字符串中第一个匹配项的下标 [KMP算法]
     public int strStr(String haystack, String needle) {
         return 1;
+    }
+
+    public static void main(String[] args) {
+        int[] a = new int[]{1, 2};
+        int[] b = new int[]{1, 2};
+
+    }
+
+    // 31. 下一个排列 123546214
+    public void nextPermutation(int[] nums) {
+        if (nums.length < 2) return;
+        int i = nums.length - 1;
+        int j = nums.length - 1;
+        while (i > 0) {
+            if (nums[i] > nums[i - 1]) {
+                i--;
+                break;
+            }
+            i--;
+            if (i == 0) {
+                Arrays.sort(nums);
+                return;
+            }
+        }
+        int rminLoc = i + 1;
+        while (j > i) {
+            if (nums[j] > nums[i] && nums[j] < nums[rminLoc]) {
+                rminLoc = j;
+            }
+            j--;
+        }
+        swap(nums, i, rminLoc);
+        for (int k = i + 1, l = 0; k < nums.length; k++, l++) {
+            boolean roundSorted = false;
+            for (int m = i + 1; m < nums.length - 1 - l; m++) {
+                if (nums[m] > nums[m + 1]) {
+                    swap(nums, m, m + 1);
+                    roundSorted = true;
+                }
+            }
+            if (!roundSorted) break;
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 
     // 70. 爬楼梯

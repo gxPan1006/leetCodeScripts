@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e1ce039-3dc8-4f44-8d2f-4b1ea4fdc919" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/dataStructure/SelectionSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataStructure/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/BubbleSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataStructure/InsertSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/InsertSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leetCode/_1To100.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_1To100.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,9 +58,22 @@
       <recent name="leetCode" />
     </key>
   </component>
-  <component name="RunManager" selected="Application._1To100">
-    <configuration name="BinaryTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="dataStructure.BinaryTree" />
+  <component name="RunManager" selected="Application.SelectionSort">
+    <configuration name="BubbleSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dataStructure.BubbleSort" />
+      <module name="leetCodeScript" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataStructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InsertSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dataStructure.InsertSort" />
       <module name="leetCodeScript" />
       <extension name="coverage">
         <pattern>
@@ -75,13 +92,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="dataStructure.Main" />
-      <module name="leetCodeScript" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dataStructure.QuickSort" />
       <module name="leetCodeScript" />
@@ -95,9 +105,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestLock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="javaRelated.TestLock" />
+    <configuration name="SelectionSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dataStructure.SelectionSort" />
       <module name="leetCodeScript" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataStructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -111,11 +127,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SelectionSort" />
+        <item itemvalue="Application.InsertSort" />
+        <item itemvalue="Application.BubbleSort" />
         <item itemvalue="Application._1To100" />
         <item itemvalue="Application.QuickSort" />
-        <item itemvalue="Application.BinaryTree" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -136,7 +152,7 @@
       <workItem from="1691473319265" duration="1281000" />
       <workItem from="1691818835226" duration="5658000" />
       <workItem from="1692199856095" duration="2602000" />
-      <workItem from="1692239284948" duration="62762000" />
+      <workItem from="1692239284948" duration="93025000" />
     </task>
     <servers />
   </component>
