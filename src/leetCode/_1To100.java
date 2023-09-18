@@ -289,8 +289,8 @@ class _1To100 {
     }
 
     // 26. 删除有序数组中的重复项 [双指针]
-    // [0,1,2,3,1.,2,2,3',3,4]
-    public int removeDuplicates(int[] nums) {
+    // [0,1,2,3,1.,2,2,3',3,4]  [0,1.,1,1',1,2,2,3,3,4]
+    public int removeDuplicates1(int[] nums) {
         int i = 1;
         int j = 1;
         while (i < nums.length) {
@@ -308,6 +308,18 @@ class _1To100 {
 
 
     // 27. 移除元素
+    public int removeElement(int[] nums, int val) {
+        int n = nums.length;
+        int left = 0;
+        for (int right = 0; right < n; right++) {
+            if (nums[right] != val) {
+                nums[left] = nums[right];
+                left++;
+            }
+        }
+        return left;
+    }
+
     public int DeprecatedRemoveElement(int[] nums, int val) {
         int temp;
         int right = nums.length - 1;
@@ -392,16 +404,51 @@ class _1To100 {
         return dp[n];
     }
 
-    public int removeElement(int[] nums, int val) {
+    // 80. 删除有序数组中的重复项 [0,0,1,1,1,2,2,3,3,4]
+    public int removeDuplicates(int[] nums) {
         int n = nums.length;
-        int left = 0;
-        for (int right = 0; right < n; right++) {
-            if (nums[right] != val) {
-                nums[left] = nums[right];
-                left++;
+        if (n <= 2) {
+            return n;
+        }
+        int slow = 2, fast = 2;
+        while (fast < n) {
+            if (nums[slow - 2] != nums[fast]) {
+                nums[slow] = nums[fast];
+                ++slow;
+            }
+            ++fast;
+        }
+        return slow;
+    }
+
+    // 88. 合并两个有序数组  1 2 3    2 5 6
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] newNums = new int[m + n];
+        int k = 0, i = 0, j = 0;
+        while (k < m + n) {
+            if (i < m && (j >= n || nums1[i] <= nums2[j])) {
+                newNums[k++] = nums1[i++];
+            } else {
+                newNums[k++] = nums2[j++];
             }
         }
-        return left;
+
+        if (m + n >= 0) System.arraycopy(newNums, 0, nums1, 0, m + n);
+    }
+
+    // wrong way
+    public void wrongMerge(int[] nums1, int m, int[] nums2, int n) {
+        int[] newNums = new int[m + n];
+        int k = 0, i = 0, j = 0;
+        while (k < m + n) {
+            if (j >= n || nums1[i] <= nums2[j]) {
+                newNums[k] = nums1[i++];
+            } else if (i >= m || nums1[i] > nums2[j]) {
+                newNums[k] = nums2[j++];
+            }
+            k++;
+        }
+        nums1 = newNums;
     }
 
     // 搜索插入位置

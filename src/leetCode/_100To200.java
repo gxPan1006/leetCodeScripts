@@ -1,9 +1,12 @@
 package leetCode;
 
+import dataStructure.InsertSort;
 import dataStructure.basic.ListNode;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class _100To200 {
     // 121. 买卖股票 [动态规划] // TODO 动态规划
@@ -42,4 +45,48 @@ public class _100To200 {
         }
         return null;
     }
+
+    // 169. 多数元素
+    public int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> counts = new HashMap<>();
+        for (int num : nums) {
+            if (!counts.containsKey(num)) {
+                counts.put(num, 1);
+            } else {
+                counts.put(num, counts.get(num) + 1);
+            }
+        }
+        for (Map.Entry<Integer, Integer> e : counts.entrySet()) {
+            if (e.getValue() > nums.length/2) {
+                return e.getKey();
+            }
+        }
+        return 0;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
