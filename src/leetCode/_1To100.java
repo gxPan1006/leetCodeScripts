@@ -393,6 +393,36 @@ class _1To100 {
         nums[j] = temp;
     }
 
+    // 45. 跳跃游戏 【贪心算法】[2,3,1,1,4] [3,2,1,0,4]
+    // 实现思路:在具体的实现中，我们维护当前能够到达的最大下标位置，记为边界。
+    // 我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1。
+    public int jump(int[] nums) {
+        int maxPos = 0;
+        int border = 0;
+        int steps = 0;
+        for (int i = 0; i < nums.length -1; i++) {
+            maxPos = Math.max(i + nums[i], maxPos);
+            if (i == border) {
+                border = maxPos;
+                steps++;
+            }
+        }
+        return steps;
+    }
+
+    // 50. 跳跃游戏 【贪心】[2,3,1,1,4] [3,2,1,0,4]
+    public boolean canJump(int[] nums) {
+        int reach = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > reach) return false;
+            if (i + nums[i] > reach) {
+                reach = i + nums[i];
+            }
+        }
+        return true;
+    }
+
+
     // 70. 爬楼梯
     public int climbStairs(int n) {
         int[] dp = new int[46];

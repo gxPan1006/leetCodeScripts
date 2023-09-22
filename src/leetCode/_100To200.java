@@ -57,11 +57,21 @@ public class _100To200 {
             }
         }
         for (Map.Entry<Integer, Integer> e : counts.entrySet()) {
-            if (e.getValue() > nums.length/2) {
+            if (e.getValue() > nums.length / 2) {
                 return e.getKey();
             }
         }
         return 0;
+    }
+
+    // 189. 轮转数组
+    public void rotate(int[] nums, int k) {
+        int len = nums.length;
+        int[] newNums = new int[len];
+        for (int i = 0; i < len; i++) {
+            newNums[i + (i + k) / len] = nums[i];
+        }
+        System.arraycopy(newNums, 0, nums, 0, len);
     }
 }
 
