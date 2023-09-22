@@ -1,6 +1,21 @@
 package leetCode;
 
+import java.util.Arrays;
+
 public class _Others {
+    // 274. H指数 （有更优解）[3,0,6,1,5]
+    public int hIndex(int[] citations) {
+        int h = 0;
+        int len = citations.length - 1;
+        Arrays.sort(citations); // [0, 1, 3, 5, 6]
+        while (len >= 0 && citations[len] >= h + 1) {
+            h++;
+            len--;
+        }
+        return h;
+    }
+
+
     // 463. 岛屿的周长
     static int[] dx = {0, 1, 0, -1};
     static int[] dy = {1, 0, -1, 0};
