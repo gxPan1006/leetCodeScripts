@@ -401,12 +401,12 @@ class _1To100 {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 char c = board[i][j];
-                int index = c-'0'-1;
+                int index = c - '0' - 1;
                 if (c != '.') {
                     rows[i][index]++;
                     column[j][index]++;
-                    subclass[i/3][j/3][index]++;
-                    if (rows[i][index]>1||column[j][index]>1||subclass[i/3][j/3][index]>1) {
+                    subclass[i / 3][j / 3][index]++;
+                    if (rows[i][index] > 1 || column[j][index] > 1 || subclass[i / 3][j / 3][index] > 1) {
                         return false;
                     }
                 }
@@ -432,6 +432,27 @@ class _1To100 {
         return steps;
     }
 
+    // 48. 旋转图像
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        // 水平翻转
+        for (int i = 0; i < n / 2; ++i) {
+            for (int j = 0; j < n; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - i - 1][j];
+                matrix[n - i - 1][j] = temp;
+            }
+        }
+        // 主对角线翻转
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
     // 50. 跳跃游戏 【贪心】[2,3,1,1,4] [3,2,1,0,4]
     public boolean canJump(int[] nums) {
         int reach = 0;
@@ -444,6 +465,32 @@ class _1To100 {
         return true;
     }
 
+    // 54. 螺旋矩阵
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans = new ArrayList<>();
+
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int row = 0, column = 0;
+        boolean[][] visited = new boolean[rows][columns];
+        int totalSteps = rows * columns;
+
+        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int index = 0;
+        for (int i = 0; i < totalSteps; i++) {
+            ans.add(matrix[row][column]);
+            visited[row][column] = true;
+
+            int nextRow = row + directions[index][0], nextColumn = column + directions[index][1];
+            if (nextRow < 0 || nextRow >= rows || nextColumn < 0 || nextColumn >= columns || visited[nextRow][nextColumn]) {
+                index = (index + 1) % 4;
+            }
+            row = row + directions[index][0];
+            column = column + directions[index][1];
+        }
+        return ans;
+    }
+
 
     // 70. 爬楼梯
     public int climbStairs(int n) {
@@ -454,6 +501,27 @@ class _1To100 {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
         return dp[n];
+    }
+
+    // 73. 矩阵置0
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = col[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
     }
 
     // 80. 删除有序数组中的重复项 [0,0,1,1,1,2,2,3,3,4]
