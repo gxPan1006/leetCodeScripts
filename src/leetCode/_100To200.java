@@ -68,6 +68,22 @@ public class _100To200 {
         return null;
     }
 
+    // 167. 两数之和 II [双指针]
+    public int[] twoSum(int[] numbers, int target) {
+        int low = 0, high = numbers.length - 1;
+        while (low < high) {
+            int sum = numbers[low] + numbers[high];
+            if (sum == target) {
+                return new int[]{low + 1, high + 1};
+            } else if (sum < target) {
+                ++low;
+            } else {
+                --high;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
     // 169. 多数元素
     public int majorityElement(int[] nums) {
         HashMap<Integer, Integer> counts = new HashMap<>();

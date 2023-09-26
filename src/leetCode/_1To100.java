@@ -6,7 +6,6 @@ import lombok.val;
 import java.util.*;
 
 class _1To100 {
-
     // 1. 两数之和 [hashMap]
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -393,6 +392,29 @@ class _1To100 {
         nums[j] = temp;
     }
 
+    // 36. 有效的数组
+    public boolean isValidSudoku(char[][] board) {
+        int[][] rows = new int[9][9];
+        int[][] column = new int[9][9];
+        int[][][] subclass = new int[3][3][9];
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char c = board[i][j];
+                int index = c-'0'-1;
+                if (c != '.') {
+                    rows[i][index]++;
+                    column[j][index]++;
+                    subclass[i/3][j/3][index]++;
+                    if (rows[i][index]>1||column[j][index]>1||subclass[i/3][j/3][index]>1) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     // 45. 跳跃游戏 【贪心算法】[2,3,1,1,4] [3,2,1,0,4]
     // 实现思路:在具体的实现中，我们维护当前能够到达的最大下标位置，记为边界。
     // 我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1。
@@ -400,7 +422,7 @@ class _1To100 {
         int maxPos = 0;
         int border = 0;
         int steps = 0;
-        for (int i = 0; i < nums.length -1; i++) {
+        for (int i = 0; i < nums.length - 1; i++) {
             maxPos = Math.max(i + nums[i], maxPos);
             if (i == border) {
                 border = maxPos;
