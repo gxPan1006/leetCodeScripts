@@ -37,6 +37,8 @@ public class _Others {
         return minRange != Integer.MAX_VALUE ? minRange : 0;
     }
 
+    // 242. 有效的字母异位
+
     // 274. H指数 （有更优解）[3,0,6,1,5]
     public int hIndex(int[] citations) {
         int h = 0;
@@ -58,7 +60,7 @@ public class _Others {
         int start = 0, end;
         for (int i = 0; i < pattern.length(); i++) {
             end = start;
-            if (end> s.length())) return false;
+            if (end> s.length()) return false;
             while (end < s.length() && s.charAt(end) != ' ') {
                 end++;
             }
