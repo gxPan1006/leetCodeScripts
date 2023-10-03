@@ -453,6 +453,20 @@ class _1To100 {
         }
     }
 
+    // 49. 字母异位器分组
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str: strs) {
+            char[] array = str.toCharArray();
+            Arrays.sort(array);
+            String key = new String(array);
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(str);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+
     // 50. 跳跃游戏 【贪心】[2,3,1,1,4] [3,2,1,0,4]
     public boolean canJump(int[] nums) {
         int reach = 0;

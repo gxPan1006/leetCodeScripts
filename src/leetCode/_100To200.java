@@ -50,6 +50,28 @@ public class _100To200 {
         return true;
     }
 
+    // 128. 最长连续序列
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        int longest = 0;
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        for (int num : set) {
+            if (!set.contains(num - 1)) {
+                int curNum = num;
+                int curLen = 1;
+                while (set.contains(curNum+1)) {
+                    curNum++;
+                    curLen++;
+                }
+                longest = Math.max(longest, curLen);
+            }
+        }
+        return longest;
+    }
+
     // 160. 相交链表 [hashList，]
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
