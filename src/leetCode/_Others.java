@@ -38,6 +38,27 @@ public class _Others {
     }
 
     // 242. 有效的字母异位
+    public static boolean isAnagram(String s, String t) {
+        HashMap<Character, Integer> count = new HashMap<>();
+        int i = 0, j = 0;
+        while (i < s.length()) {
+            if (!count.containsKey(s.charAt(i))) {
+                count.put(s.charAt(i), 1);
+            } else {
+                count.put(s.charAt(i), count.get(s.charAt(i)) + 1);
+            }
+            i++;
+        }
+        while (j < t.length()) {
+            if (count.containsKey(t.charAt(j))) {
+                if (count.get(t.charAt(j)) - 1 < 0) return false;
+                else if (count.get(t.charAt(j)) - 1 == 0) count.remove(t.charAt(j));
+                else count.put(t.charAt(j), count.get(t.charAt(j)) - 1);
+            } else return false;
+            j++;
+        }
+        return count.isEmpty();
+    }
 
     // 274. H指数 （有更优解）[3,0,6,1,5]
     public int hIndex(int[] citations) {
@@ -60,13 +81,13 @@ public class _Others {
         int start = 0, end;
         for (int i = 0; i < pattern.length(); i++) {
             end = start;
-            if (end> s.length()) return false;
+            if (end > s.length()) return false;
             while (end < s.length() && s.charAt(end) != ' ') {
                 end++;
             }
             String word = s.substring(start, end);
             if (char2Str.containsKey(pattern.charAt(i)) && !char2Str.get(pattern.charAt(i)).equals(word)
-            || str2Char.containsKey(word) && !str2Char.get(word).equals(pattern.charAt(i))) {
+                    || str2Char.containsKey(word) && !str2Char.get(word).equals(pattern.charAt(i))) {
                 return false;
             }
             char2Str.put(pattern.charAt(i), word);
