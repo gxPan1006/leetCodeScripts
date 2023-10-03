@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e1ce039-3dc8-4f44-8d2f-4b1ea4fdc919" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/leetCode/test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/_100To200.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_100To200.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leetCode/_Others.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/_Others.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +24,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -50,7 +53,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -160,7 +166,9 @@
       <workItem from="1694920951208" duration="12725000" />
       <workItem from="1695092518672" duration="597000" />
       <workItem from="1695093723966" duration="1258000" />
-      <workItem from="1695195988290" duration="15118000" />
+      <workItem from="1695195988290" duration="24881000" />
+      <workItem from="1695882845408" duration="597000" />
+      <workItem from="1696054444955" duration="2557000" />
     </task>
     <servers />
   </component>

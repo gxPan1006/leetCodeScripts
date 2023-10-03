@@ -1,8 +1,25 @@
 package leetCode;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class _Others {
+    // 205. 同构字符串
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Character> s2t = new HashMap<>();
+        HashMap<Character, Character> t2s = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s2t.containsKey(s.charAt(i)) && s2t.get(s.charAt(i)) != t.charAt(i) ||
+                    t2s.containsKey(t.charAt(i)) && t2s.get(t.charAt(i)) != s.charAt(i)) {
+                return false;
+            }
+            s2t.put(s.charAt(i), t.charAt(i));
+            t2s.put(t.charAt(i), s.charAt(i));
+        }
+        return true;
+    }
+
     // 209. 长度最小的子数组
     public int minSubArrayLen(int target, int[] nums) {
         int i = 0, j = 0, sum = 0;
@@ -30,6 +47,24 @@ public class _Others {
             len--;
         }
         return h;
+    }
+
+    // 383. 赎金信
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if (cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // 392. 判断子序列 [双指针]
