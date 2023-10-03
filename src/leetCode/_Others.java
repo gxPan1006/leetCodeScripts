@@ -49,6 +49,31 @@ public class _Others {
         return h;
     }
 
+    // 290. 单词规律
+    // 输入: pattern = "abba", s = "dog cat cat dog"
+    // 输出: true
+    public boolean wordPattern(String pattern, String s) {
+        HashMap<Character, String> char2Str = new HashMap<>();
+        HashMap<String, Character> str2Char = new HashMap<>();
+        int start = 0, end;
+        for (int i = 0; i < pattern.length(); i++) {
+            end = start;
+            if (end> s.length())) return false;
+            while (end < s.length() && s.charAt(end) != ' ') {
+                end++;
+            }
+            String word = s.substring(start, end);
+            if (char2Str.containsKey(pattern.charAt(i)) && !char2Str.get(pattern.charAt(i)).equals(word)
+            || str2Char.containsKey(word) && !str2Char.get(word).equals(pattern.charAt(i))) {
+                return false;
+            }
+            char2Str.put(pattern.charAt(i), word);
+            str2Char.put(word, pattern.charAt(i));
+            start = end + 1;
+        }
+        return start == s.length();
+    }
+
     // 383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
         if (ransomNote.length() > magazine.length()) {
