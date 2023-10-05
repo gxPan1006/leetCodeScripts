@@ -88,6 +88,51 @@ public class Others {
         }
     }
 
+    // 用list实现优先队列（简单版， 复杂版可以用二叉堆）
+    public static class SimplePriorityQueue<T extends Comparable<T>> {
+        private final List<T> data;
+
+        public SimplePriorityQueue() {
+            data = new ArrayList<>();
+        }
+
+        // 插入时进行排序
+        public void insert(T item) {
+            boolean added = false;
+            for (int i = 0; i < data.size(); i++) {
+                if (item.compareTo(data.get(i)) < 0) {
+                    data.add(i, item);
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                data.add(item);
+            }
+        }
+
+        public T poll() {
+            if (data.isEmpty()) {
+                return null;
+            }
+            return data.remove(0);
+        }
+
+        public boolean isEmpty() {
+            return data.isEmpty();
+        }
+
+        public static void main(String[] args) {
+            SimplePriorityQueue<Integer> queue = new SimplePriorityQueue<>();
+            queue.insert(3);
+            queue.insert(1);
+            queue.insert(4);
+            System.out.println(queue.poll()); // Outputs: 1
+            System.out.println(queue.poll()); // Outputs: 3
+            System.out.println(queue.poll()); // Outputs: 4
+        }
+    }
+
 
     public static void main(String[] args) {
         HashMap<String, String> hs = new HashMap<>();
