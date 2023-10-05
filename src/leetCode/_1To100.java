@@ -84,6 +84,29 @@ class _1To100 {
         return globalMaxStr;
     }
 
+    // 6. N字型变换
+    public String convert(String s, int numRows) {
+        StringBuffer[] sb = new StringBuffer[Math.min(numRows, s.length())];
+        for (int i = 0; i< sb.length; i++) {
+            sb[i] = new StringBuffer();
+        }
+        int index = 0;
+        boolean goingDown = false;
+        for (char c : s.toCharArray()) {
+            sb[index].append(c);
+            if (index == 0 || index == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            index = index + (goingDown ? 1 : -1);
+        }
+
+        StringBuffer ans = new StringBuffer();
+        for (StringBuffer row: sb) {
+            ans.append(row);
+        }
+        return ans.toString();
+    }
+
     public static String longestPalindrome(String s) {
         boolean[][] dp = new boolean[1000][1000];
         int maxLength = 1;
@@ -456,7 +479,7 @@ class _1To100 {
     // 49. 字母异位器分组
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
-        for (String str: strs) {
+        for (String str : strs) {
             char[] array = str.toCharArray();
             Arrays.sort(array);
             String key = new String(array);
