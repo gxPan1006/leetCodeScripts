@@ -4,7 +4,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class Others {
-    // 不使用开方函数计算根号
+    // 1. 不使用开方函数计算根号
     public static double sqrt(double number) {
         // 定义一个较小的阈值，当估算值与实际值的差异小于这个值时，认为已趋于稳定
         final double EPSILON = 1e-10;
@@ -24,7 +24,7 @@ public class Others {
         return estimate;
     }
 
-    // 用List手写HashTable
+    // 2. 用List手写HashTable
     public static class SimpleHashTable<K, V> {
         private static class Entry<K, V> {
             K key;
@@ -88,7 +88,7 @@ public class Others {
         }
     }
 
-    // 用list实现优先队列（简单版， 复杂版可以用二叉堆）
+    // 3. 用list实现优先队列（简单版， 复杂版可以用二叉堆）
     public static class SimplePriorityQueue<T extends Comparable<T>> {
         private final List<T> data;
 

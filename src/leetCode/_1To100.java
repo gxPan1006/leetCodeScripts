@@ -540,6 +540,32 @@ class _1To100 {
         return dp[n];
     }
 
+    // 71. 简化路径
+    public String simplifyPath(String path) {
+        String[] names = path.split("/");
+        Deque<String> deque = new ArrayDeque<>();
+
+        for (String name : names) {
+            if ("..".equals(name)) {
+                if (!deque.isEmpty()) {
+                    deque.pollLast();
+                }
+            } else if (name.length() > 0 && !".".equals(name)) {
+                deque.offerLast(name);
+            }
+        }
+        StringBuffer ans = new StringBuffer();
+        if (deque.isEmpty()) {
+            ans.append('/');
+        } else {
+            while (!deque.isEmpty()) {
+                ans.append('/');
+                ans.append(deque.pollFirst());
+            }
+        }
+        return ans.toString();
+    }
+
     // 73. 矩阵置0
     public void setZeroes(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
