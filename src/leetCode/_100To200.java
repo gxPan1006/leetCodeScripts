@@ -3,10 +3,7 @@ package leetCode;
 import dataStructure.InsertSort;
 import dataStructure.basic.ListNode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class _100To200 {
     // 121. 买卖股票 [动态规划] // TODO 动态规划
@@ -71,6 +68,35 @@ public class _100To200 {
         }
         return longest;
     }
+
+    // 150. 逆波兰表达式求值
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new LinkedList<>();
+        int n = tokens.length;
+        for (int i = 0; i < n; i++) {
+            String token = tokens[i];
+            if (isNumber(token)) {
+                stack.push(Integer.parseInt(token));
+            } else {
+                int num2 = stack.pop();
+                int num1 = stack.pop();
+                switch (token) {
+                    case "+" -> stack.push(num1 + num2);
+                    case "-" -> stack.push(num1 - num2);
+                    case "*" -> stack.push(num1 * num2);
+                    case "/" -> stack.push(num1 / num2);
+                    default -> {
+                    }
+                }
+            }
+        }
+        return stack.pop();
+    }
+
+    public boolean isNumber(String token) {
+        return !("+".equals(token) || "-".equals(token) || "*".equals(token) || "/".equals(token));
+    }
+
 
     // 160. 相交链表 [hashList，]
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {

@@ -1,5 +1,7 @@
 package leetCode;
 
+import dataStructure.basic.ListNode;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -18,6 +20,19 @@ public class _Others {
             t2s.put(t.charAt(i), s.charAt(i));
         }
         return true;
+    }
+
+    // 206. 反转链表
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
     }
 
     // 209. 长度最小的子数组
