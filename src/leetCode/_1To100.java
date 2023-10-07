@@ -1,11 +1,10 @@
 package leetCode;
 
 import dataStructure.basic.ListNode;
-import lombok.val;
 
 import java.util.*;
 
-class _1To100 {
+public class _1To100 {
     // 1. 两数之和 [hashMap]
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -87,7 +86,7 @@ class _1To100 {
     // 6. N字型变换
     public String convert(String s, int numRows) {
         StringBuffer[] sb = new StringBuffer[Math.min(numRows, s.length())];
-        for (int i = 0; i< sb.length; i++) {
+        for (int i = 0; i < sb.length; i++) {
             sb[i] = new StringBuffer();
         }
         int index = 0;
@@ -101,7 +100,7 @@ class _1To100 {
         }
 
         StringBuffer ans = new StringBuffer();
-        for (StringBuffer row: sb) {
+        for (StringBuffer row : sb) {
             ans.append(row);
         }
         return ans.toString();
@@ -415,6 +414,23 @@ class _1To100 {
         nums[j] = temp;
     }
 
+    // 35. 搜索插入位置
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        int mid;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (target > nums[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
     // 36. 有效的数组
     public boolean isValidSudoku(char[][] board) {
         int[][] rows = new int[9][9];
@@ -634,21 +650,43 @@ class _1To100 {
         nums1 = newNums;
     }
 
-    // 搜索插入位置
-    public int searchInsert(int[] nums, int target) {
-        int left = 0, right = nums.length - 1;
-        int mid;
-        while (left <= right) {
-            mid = (left + right) / 2;
-            if (nums[mid] == target) {
-                return mid;
-            } else if (target > nums[mid]) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
+    // 92. 反转链表2
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode ans = new ListNode(-1); // 虚拟节点
+        ans.next = head;
+        ListNode prev = ans; // Start from the dummy node
+        for (int i = 0; i < left - 1; i++) {
+            prev = prev.next;
         }
-        return left;
+
+        ListNode outerLeft = prev;
+        ListNode leftEdge = prev.next;
+
+        for (int i = 0; i < right - left + 1; i++) {
+            prev = prev.next;
+        }
+        ListNode rightEdge = prev;
+        ListNode outerRight = prev.next;
+
+        rightEdge.next = null;
+
+        ListNode a = reverseList(leftEdge);
+
+        outerLeft.next = a;
+        leftEdge.next = outerRight;
+        return ans.next;
+    }
+
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
     }
 }
 
