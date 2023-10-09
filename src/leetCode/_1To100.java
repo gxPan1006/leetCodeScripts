@@ -544,6 +544,47 @@ public class _1To100 {
         return ans;
     }
 
+    // 61. 旋转链表 【链表】[适当部位截断，即是旋转]
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null || k == 0) {
+            return head;
+        }
+
+        // 1. 获取链表长度
+        int n = 1;
+        ListNode curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+            n++;
+        }
+
+        // 2. 取模处理
+        k = k % n;
+        if (k == 0) {
+            return head;
+        }
+
+        // 3. 双指针法
+        ListNode first = head;
+        for (int i = 0; i < k; i++) {
+            first = first.next;
+        }
+
+        ListNode second = head;
+        while (first.next != null) {
+            first = first.next;
+            second = second.next;
+        }
+
+        // 4. 旋转处理
+        first.next = head;
+        head = second.next;
+        second.next = null;
+
+        // 5. 返回结果
+        return head;
+    }
+
 
     // 70. 爬楼梯
     public int climbStairs(int n) {
