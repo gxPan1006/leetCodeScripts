@@ -59,7 +59,7 @@ public class _100To200 {
             if (!set.contains(num - 1)) {
                 int curNum = num;
                 int curLen = 1;
-                while (set.contains(curNum+1)) {
+                while (set.contains(curNum + 1)) {
                     curNum++;
                     curLen++;
                 }
@@ -67,6 +67,56 @@ public class _100To200 {
             }
         }
         return longest;
+    }
+
+    // 146. LRU缓存
+    static class LRUCache {
+        private int capacity;
+        private Map<Integer, Node> map = new HashMap<>();
+        private LinkedList<Node> cache = new LinkedList<>();
+
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+        }
+
+        public int get(int key) {
+            if (!map.containsKey(key)) return -1;
+            int val = map.get(key).val;
+            // 利用 put 方法把该数据提前
+            put(key, val);
+            return val;
+        }
+
+        public void put(int key, int value) {
+            Node x = new Node(key, value);
+            if (map.containsKey(key)) {
+                // 删除旧的节点，新的插到头部
+                cache.remove(map.get(key));
+                cache.addFirst(x);
+                // 更新 map 中对应的数据
+                map.put(key, x);
+            } else {
+                if (cache.size() == capacity) {
+                    // 删除链表最后一个数据
+                    Node last = cache.removeLast();
+                    map.remove(last.key);
+                }
+                // 直接添加到头部
+                cache.addFirst(x);
+                map.put(key, x);
+            }
+        }
+    }
+
+    static class Node {
+        int key, val;
+        Node prev, next;
+
+        public Node(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
+
     }
 
     // 150. 逆波兰表达式求值
