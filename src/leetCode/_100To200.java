@@ -57,6 +57,35 @@ public class _100To200 {
         return root;
     }
 
+    // 106. 从中序与后序遍历序列构造二叉树
+    int postIndex;
+    int[] inOrder, postOrder;
+    Map<Integer, Integer> map = new HashMap<>();
+
+    public TreeNode buildTree2(int[] inorder, int[] postorder) {
+        this.inOrder = inorder;
+        this.postOrder = postorder;
+        int len = postorder.length;
+        postIndex = len - 1;
+
+        for (int i = 0; i < len; i++) {
+            map.put(inorder[i], i);
+        }
+        return constructByInAndPostOrder(0, len );
+    }
+
+    private TreeNode constructByInAndPostOrder(int start, int end) {
+        if (start == end) return null;
+
+        int rootValue = postOrder[postIndex];
+        int idxInInOrder = map.get(rootValue);
+        TreeNode root = new TreeNode(rootValue);
+        postIndex--;
+        constructByInAndPostOrder(idxInInOrder + 1, end);
+        constructByInAndPostOrder(start, idxInInOrder);
+        return root;
+    }
+
     // 121. 买卖股票 [动态规划] // TODO 动态规划
     public int maxProfit(int[] prices) {
         int minPrice = prices[0];
