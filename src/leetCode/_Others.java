@@ -2,8 +2,7 @@ package leetCode;
 
 import dataStructure.basic.ListNode;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class _Others {
     // 205. 同构字符串
@@ -50,6 +49,30 @@ public class _Others {
             j++;
         }
         return minRange != Integer.MAX_VALUE ? minRange : 0;
+    }
+
+    // 238. 除自身以外数组的乘积
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int[] result = new int[n];
+
+        left[0] = 1;
+        for (int i = 1; i < n; i++) {
+            left[i] = left[i - 1] * nums[i - 1];
+        }
+
+        right[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            right[i] = right[i + 1] * nums[i + 1];
+        }
+
+        for (int i = 0; i < n; i++) {
+            result[i] = left[i] * right[i];
+        }
+
+        return result;
     }
 
     // 242. 有效的字母异位
@@ -111,6 +134,51 @@ public class _Others {
         }
         return start == s.length();
     }
+
+    // 380. O(1) 时间插入、删除和获取随机元素
+    // 本来可以用一个hashMap来实现，但由于需要随机get，hashMap实现不了，只能用HashMap + ArrayList
+    // 随机数： Random random = new Random(); random.nextInt();
+    class RandomizedSet {
+        private Map<Integer, Integer> dict;
+        private List<Integer> list;
+        private Random rand = new Random();
+
+        /** Initialize your data structure here. */
+        public RandomizedSet() {
+            dict = new HashMap<>();
+            list = new ArrayList<>();
+        }
+
+        /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+        public boolean insert(int val) {
+            if (dict.containsKey(val)) return false;
+
+            dict.put(val, list.size());
+            list.add(list.size(), val);
+            return true;
+        }
+
+        /** Removes a value from the set. Returns true if the set contained the specified element. */
+        public boolean remove(int val) {
+            if (!dict.containsKey(val)) return false;
+
+            int lastElement = list.get(list.size() - 1);
+            int idx = dict.get(val);
+
+            list.set(idx, lastElement);
+            dict.put(lastElement, idx);
+
+            list.remove(list.size() - 1);
+            dict.remove(val);
+            return true;
+        }
+
+        /** Get a random element from the set. */
+        public int getRandom() {
+            return list.get(rand.nextInt(list.size()));
+        }
+    }
+
 
     // 383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
