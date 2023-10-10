@@ -176,4 +176,26 @@ public class _Others {
         }
         return res;
     }
+
+    // 452. 用最少数量的箭引爆气球
+    public int findMinArrowShots(int[][] points) {
+        if (points == null || points.length == 0) return 0;
+
+        // 按照结束点排序
+        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
+
+        int arrows = 1;
+        int end = points[0][1];
+        for (int i = 1; i < points.length; i++) {
+            // 如果箭能击中当前气球
+            if (points[i][0] <= end) {
+                continue;
+            }
+            // 否则，我们需要一支新的箭，并更新箭的位置为当前气球的结束点
+            arrows++;
+            end = points[i][1];
+        }
+
+        return arrows;
+    }
 }

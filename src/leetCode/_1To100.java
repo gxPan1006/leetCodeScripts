@@ -704,6 +704,11 @@ public class _1To100 {
     }
 
     // 80. 删除有序数组中的重复项 [0,0,1,1,1,2,2,3,3,4]
+    // 我们可以让指针 i 遍历整个数组。
+    // 初始时，我们将 j 设置为2（因为前两个元素总是有效的）。
+    // 当 i 遍历数组时，我们将 nums[i] 与新数组的最后第二个元素 nums[j-2] 进行比较。
+    // 如果 nums[i] 不等于 nums[j-2]，则说明 nums[i] 可以加入新数组，因为它还没有重复两次。
+    // 如果 nums[i] 等于 nums[j-2]，则我们简单地跳过 nums[i]，因为新数组中已经有两个重复的 nums[i]。
     public int removeDuplicates(int[] nums) {
         int n = nums.length;
         if (n <= 2) {
