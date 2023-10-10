@@ -83,29 +83,6 @@ public class _1To100 {
         return globalMaxStr;
     }
 
-    // 6. N字型变换
-    public String convert(String s, int numRows) {
-        StringBuffer[] sb = new StringBuffer[Math.min(numRows, s.length())];
-        for (int i = 0; i < sb.length; i++) {
-            sb[i] = new StringBuffer();
-        }
-        int index = 0;
-        boolean goingDown = false;
-        for (char c : s.toCharArray()) {
-            sb[index].append(c);
-            if (index == 0 || index == numRows - 1) {
-                goingDown = !goingDown;
-            }
-            index = index + (goingDown ? 1 : -1);
-        }
-
-        StringBuffer ans = new StringBuffer();
-        for (StringBuffer row : sb) {
-            ans.append(row);
-        }
-        return ans.toString();
-    }
-
     public static String longestPalindrome(String s) {
         boolean[][] dp = new boolean[1000][1000];
         int maxLength = 1;
@@ -133,6 +110,29 @@ public class _1To100 {
             }
         }
         return maxStr;
+    }
+
+    // 6. N字型变换
+    public String convert(String s, int numRows) {
+        StringBuffer[] sb = new StringBuffer[Math.min(numRows, s.length())];
+        for (int i = 0; i < sb.length; i++) {
+            sb[i] = new StringBuffer();
+        }
+        int index = 0;
+        boolean goingDown = false;
+        for (char c : s.toCharArray()) {
+            sb[index].append(c);
+            if (index == 0 || index == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            index = index + (goingDown ? 1 : -1);
+        }
+
+        StringBuffer ans = new StringBuffer();
+        for (StringBuffer row : sb) {
+            ans.append(row);
+        }
+        return ans.toString();
     }
 
     // 9. 回文数 [回文数，数学]
@@ -542,6 +542,65 @@ public class _1To100 {
             column = column + directions[index][1];
         }
         return ans;
+    }
+
+    // 56. 合并区间
+    // Array.sort(intervals, (i1, i2) -> Integer.compare(i1[0], i2[0]))
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length <= 1) {
+            return intervals;
+        }
+
+        // 按照起始位置进行排序
+        Arrays.sort(intervals, (i1, i2) -> Integer.compare(i1[0], i2[0]));
+
+        List<int[]> result = new LinkedList<>();
+        int[] currentInterval = intervals[0];
+        result.add(currentInterval);
+
+        for (int[] interval : intervals) {
+            int currentEnd = currentInterval[1];
+            int nextBegin = interval[0];
+            int nextEnd = interval[1];
+
+            if (currentEnd >= nextBegin) {  // 判断是否重叠
+                currentInterval[1] = Math.max(currentEnd, nextEnd);  // 合并
+            } else {  // 如果不重叠, 直接加入结果集
+                currentInterval = interval;
+                result.add(currentInterval);
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+
+    // 57. 插入区间
+    // 两边搭，看能不能勾住
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList<>();
+        int i = 0;
+        int n = intervals.length;
+
+        // 将所有在新区间左边的区间添加到结果中
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            result.add(intervals[i]);
+            i++;
+        }
+
+        // 合并所有与新区间重叠的区间
+        while (i < n && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        result.add(newInterval);
+
+        // 将所有在新区间右边的区间添加到结果中
+        while (i < n) {
+            result.add(intervals[i]);
+            i++;
+        }
+
+        return result.toArray(new int[result.size()][]);
     }
 
     // 61. 旋转链表 【链表】[适当部位截断，即是旋转]

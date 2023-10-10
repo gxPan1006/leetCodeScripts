@@ -1,25 +1,37 @@
 package leetCode;
 
-import lombok.val;
+import java.util.HashMap;
+import java.util.Map;
 
-// Temp Solution
 class Solution {
-    public static void main(String[] args) {
-        int x = foundMaxLen("AABBAAAB", 2);
-        System.out.println(x);
-    }
+    // 1 2 12 15 14 3 6 7 5         5 7 1 2 3 4
+    Map<Integer, Integer> map = new HashMap<>();
+    int len;
 
-    public static int foundMaxLen(String s, int k) {
-        int maxLen = 1;
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i + 1; j < s.length(); j++) {
-                if (k < 0) break;
-                if (s.charAt(j) != s.charAt(i)) {
-                    k--;
-                }
-                if (j - i + 1 > maxLen) maxLen = j - i + 1;
+    public int findMinCost(int[] nums) {
+        len = nums.length;
+        for (int i = 0; i < len; i++) {
+            map.put(nums[i], i);
+        }
+        int startPos = 0;
+        int middleValueIdx = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == nums[i + 1] - 1) {
+                startPos++;
+            } else {
+                middleValueIdx = findMiddleVal(startPos + 1);
             }
         }
-        return maxLen;
+        return middleValueIdx - startPos;
+    }
+
+    private int findMiddleVal(int pos) {
+        for (int i = pos - 1; i < len; i++) {
+            if (i == pos) {
+                return map.get(i);
+            }
+        }
+        return len;
     }
 }
