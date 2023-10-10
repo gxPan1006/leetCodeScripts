@@ -2,10 +2,61 @@ package leetCode;
 
 import dataStructure.InsertSort;
 import dataStructure.basic.ListNode;
+import dataStructure.basic.TreeNode;
 
 import java.util.*;
 
 public class _100To200 {
+    // 104. 二叉树的最大深度
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int leftHeight = maxDepth(root.left);
+            int rightHeight = maxDepth(root.right);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
+    // 105. 从前序与中序遍历序列构造二叉树
+    int preIdx = 0;
+    int[] preorder;
+    int[] inorder;
+    HashMap<Integer, Integer> idxMap = new HashMap<>();
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.preorder = preorder;
+        this.inorder = inorder;
+
+        // Build a hashmap to store value -> its index relations
+        int idx = 0;
+        for (Integer val : inorder) {
+            idxMap.put(val, idx++);
+        }
+        return constructTree(0, inorder.length);
+    }
+
+    private TreeNode constructTree(int inLeft, int inRight) {
+        // if there is no elements to construct subtrees
+        if (inLeft == inRight)
+            return null;
+
+        // pick up preIdx element as a root
+        int rootVal = preorder[preIdx];
+        TreeNode root = new TreeNode(rootVal);
+
+        // root splits inorder list into left and right subtrees
+        int index = idxMap.get(rootVal);
+
+        // recursion
+        preIdx++;
+        // build left subtree
+        root.left = constructTree(inLeft, index);
+        // build right subtree
+        root.right = constructTree(index + 1, inRight);
+        return root;
+    }
+
     // 121. 买卖股票 [动态规划] // TODO 动态规划
     public int maxProfit(int[] prices) {
         int minPrice = prices[0];
