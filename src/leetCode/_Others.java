@@ -52,6 +52,27 @@ public class _Others {
         return minRange != Integer.MAX_VALUE ? minRange : 0;
     }
 
+    // 221. 最大正方形
+    // 由左上、左、上三个正方形的变长确定当前正方形的边长
+    public int maximalSquare(char[][] matrix) {
+        int rows = matrix.length;
+        int cols = rows > 0 ? matrix[0].length : 0;
+        int[][] dp = new int[rows + 1][cols + 1];
+        int maxLength = 0; // 记录最大边长
+
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= cols; j++) {
+                if (matrix[i-1][j-1] == '1') {
+                    dp[i][j] = Math.min(Math.min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]) + 1;
+                    maxLength = Math.max(maxLength, dp[i][j]);
+                }
+            }
+        }
+
+        return maxLength * maxLength;
+    }
+
+
     // 222. 完全二叉树的节点个数
     public int countNodes(TreeNode root) {
         return root == null ? 0 : countNodes(root.left) + countNodes(root.right) + 1;

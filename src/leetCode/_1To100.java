@@ -736,6 +736,72 @@ public class _1To100 {
         return head;
     }
 
+    // 63. 不同路径
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[][] dp = new int[m][n];
+
+        // 如果起点就是障碍物，直接返回0
+        if (obstacleGrid[0][0] == 1) return 0;
+
+        dp[0][0] = 1;
+
+        // 初始化第0列
+        for (int i = 1; i < m; i++) {
+            if (obstacleGrid[i][0] == 0 && dp[i-1][0] == 1) {
+                dp[i][0] = 1;
+            }
+        }
+
+        // 初始化第0行
+        for (int j = 1; j < n; j++) {
+            if (obstacleGrid[0][j] == 0 && dp[0][j-1] == 1) {
+                dp[0][j] = 1;
+            }
+        }
+
+        // 逐个计算其他点的路径数量
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 0) {
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+
+        return dp[m-1][n-1];
+    }
+
+    // 64. 最小路径和
+    // 第一行和第一列直接初始化，其余比较从上来的还是从左来的
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] dp = new int[m][n];
+
+        dp[0][0] = grid[0][0];
+
+        // 初始化第0列
+        for(int i = 1; i < m; i++) {
+            dp[i][0] = dp[i-1][0] + grid[i][0];
+        }
+
+        // 初始化第0行
+        for(int j = 1; j < n; j++) {
+            dp[0][j] = dp[0][j-1] + grid[0][j];
+        }
+
+        // 逐个计算其他点的最小路径和
+        for(int i = 1; i < m; i++) {
+            for(int j = 1; j < n; j++) {
+                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+
+        return dp[m-1][n-1];
+    }
+
 
     // 70. 爬楼梯
     public int climbStairs(int n) {
@@ -937,6 +1003,33 @@ public class _1To100 {
             cur = next;
         }
         return prev;
+    }
+
+    // 97. 交错字符串
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int len1 = s1.length(), len2 = s2.length(), len3 = s3.length();
+
+        if (len1 + len2 != len3) return false;
+
+        boolean[][] dp = new boolean[len1 + 1][len2 + 1];
+        dp[0][0] = true;
+
+        for (int i = 1; i <= len1; i++) {
+            dp[i][0] = dp[i-1][0] && s1.charAt(i-1) == s3.charAt(i-1);
+        }
+
+        for (int j = 1; j <= len2; j++) {
+            dp[0][j] = dp[0][j-1] && s2.charAt(j-1) == s3.charAt(j-1);
+        }
+
+        for (int i = 1; i <= len1; i++) {
+            for (int j = 1; j <= len2; j++) {
+                dp[i][j] = (dp[i-1][j] && s1.charAt(i-1) == s3.charAt(i+j-1)) ||
+                        (dp[i][j-1] && s2.charAt(j-1) == s3.charAt(i+j-1));
+            }
+        }
+
+        return dp[len1][len2];
     }
 }
 
