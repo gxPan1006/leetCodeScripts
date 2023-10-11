@@ -172,6 +172,26 @@ public class _100To200 {
         return start;
     }
 
+    // 139. 单词拆分
+    /** 如果 dp[j] 是 true 且 s[j,i]（j 到 i 的字符串片段）在 wordDict 中，那么 dp[i] 将是 true。
+     例如，如果 dp[j] 是 true，并且 "apple" 是我们的词典中的单词，那么 dp[j + len("apple")] 将是 true。*/
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDict.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    }
+
+
     // 146. LRU缓存
     static class LRUCache {
         private int capacity;
@@ -434,6 +454,23 @@ public class _100To200 {
             newNums[i + (i + k) / len] = nums[i];
         }
         System.arraycopy(newNums, 0, nums, 0, len);
+    }
+
+    // 198. 打家劫舍
+    public int rob(int[] nums) {
+        int len = nums.length;
+        if (len == 1) return nums[0];
+        int[] dp = new int[len];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+        int maxMoney = Math.max(dp[0], dp[1]);
+
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.max(dp[i-1], dp[i-2]+nums[i]);
+            maxMoney = Math.max(maxMoney, dp[i]);
+        }
+
+        return maxMoney;
     }
 }
 

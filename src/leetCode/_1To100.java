@@ -464,7 +464,9 @@ public class _1To100 {
     }
 
     // 34. 在排序数组中查找元素的第一个和最后一个位置
-    /**  */
+    /** 在第一次二分查找中，你寻找左边小于target但自身等于target的元素。这样可以找到起始位置。
+     在第二次二分查找中，你寻找右边大于target但自身等于target的元素。这样可以找到结束位置。
+     */
     public int[] searchRange(int[] nums, int target) {
         int start = findStart(nums, target);
         int end = findEnd(nums, target);
