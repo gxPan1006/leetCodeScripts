@@ -414,6 +414,96 @@ public class _1To100 {
         nums[j] = temp;
     }
 
+    // 33. 搜索旋转排序数组
+    /** 使用二分查找定位旋转点。
+     使用旋转点将数组分为两个有序的子数组。
+     根据目标值与子数组的边界值的关系，确定应在哪个子数组中继续二分查找。
+     在选定的子数组中使用二分查找查找目标值。*/
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int left = 0, right = nums.length - 1;
+
+        // 查找旋转点
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        // 'left' 是最小值的索引 (也是旋转点)
+        int rotateIndex = left;
+        left = 0;
+        right = nums.length - 1;
+
+        // 决定在哪个子数组中查找
+        if (target >= nums[rotateIndex] && target <= nums[right]) {
+            left = rotateIndex;
+        } else {
+            right = rotateIndex;
+        }
+
+        // 二分查找目标值
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
+    // 34. 在排序数组中查找元素的第一个和最后一个位置
+    /**  */
+    public int[] searchRange(int[] nums, int target) {
+        int start = findStart(nums, target);
+        int end = findEnd(nums, target);
+        return new int[] {start, end};
+    }
+
+    private int findStart(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (left < nums.length && nums[left] == target) {
+            return left;
+        }
+        return -1;
+    }
+
+    private int findEnd(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (right >= 0 && nums[right] == target) {
+            return right;
+        }
+        return -1;
+    }
+
+
     // 35. 搜索插入位置
     public int searchInsert(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
@@ -712,7 +802,7 @@ public class _1To100 {
         int bottom = rows - 1;
         while (top <= bottom) { // 注意这里是<=
             int mid = top + (bottom - top) / 2;
-            if (target >= matrix[mid][0] && (mid == rows - 1 || target < matrix[mid + 1][0]))  {
+            if (target >= matrix[mid][0] && (mid == rows - 1 || target < matrix[mid + 1][0])) {
                 int left = 0;
                 int right = columns - 1;
                 while (left <= right) { // 注意这里是<=
@@ -725,8 +815,7 @@ public class _1To100 {
                     }
                 }
                 return false; // 在当前行中没有找到目标值
-            }
-            else if (mid < rows - 1 && target >= matrix[mid + 1][0]) {
+            } else if (mid < rows - 1 && target >= matrix[mid + 1][0]) {
                 top = mid + 1;
             } else {
                 bottom = mid - 1;
@@ -734,6 +823,7 @@ public class _1To100 {
         }
         return false;
     }
+
     // 拉平处理，二维数组和一维数组的转化
     public boolean searchMatrix2(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
