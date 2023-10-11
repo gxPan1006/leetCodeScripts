@@ -1,6 +1,7 @@
 package leetCode;
 
 import dataStructure.basic.ListNode;
+import dataStructure.basic.TreeNode;
 
 import java.util.*;
 
@@ -51,6 +52,11 @@ public class _Others {
         return minRange != Integer.MAX_VALUE ? minRange : 0;
     }
 
+    // 222. 完全二叉树的节点个数
+    public int countNodes(TreeNode root) {
+        return root == null ? 0 : countNodes(root.left) + countNodes(root.right) + 1;
+    }
+
     // 238. 除自身以外数组的乘积
     public int[] productExceptSelf(int[] nums) {
         int n = nums.length;
@@ -73,6 +79,22 @@ public class _Others {
         }
 
         return result;
+    }
+
+    // 240.搜索二维矩阵
+    // 从左下角遍历，每次能排除一行或者一列
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix.length * matrix[0].length <= 1) return matrix[0][0] == target;
+        int i = matrix.length - 1;
+        int j = 0;
+        while (i > 0 && j < matrix[0].length) {
+            if (target > matrix[i][j]) {
+                j++;
+            } else if (target < matrix[i][j]) {
+                i--;
+            } else return true;
+        }
+        return false;
     }
 
     // 242. 有效的字母异位
@@ -143,13 +165,17 @@ public class _Others {
         private List<Integer> list;
         private Random rand = new Random();
 
-        /** Initialize your data structure here. */
+        /**
+         * Initialize your data structure here.
+         */
         public RandomizedSet() {
             dict = new HashMap<>();
             list = new ArrayList<>();
         }
 
-        /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+        /**
+         * Inserts a value to the set. Returns true if the set did not already contain the specified element.
+         */
         public boolean insert(int val) {
             if (dict.containsKey(val)) return false;
 
@@ -158,7 +184,9 @@ public class _Others {
             return true;
         }
 
-        /** Removes a value from the set. Returns true if the set contained the specified element. */
+        /**
+         * Removes a value from the set. Returns true if the set contained the specified element.
+         */
         public boolean remove(int val) {
             if (!dict.containsKey(val)) return false;
 
@@ -173,7 +201,9 @@ public class _Others {
             return true;
         }
 
-        /** Get a random element from the set. */
+        /**
+         * Get a random element from the set.
+         */
         public int getRandom() {
             return list.get(rand.nextInt(list.size()));
         }

@@ -71,7 +71,7 @@ public class _100To200 {
         for (int i = 0; i < len; i++) {
             map.put(inorder[i], i);
         }
-        return constructByInAndPostOrder(0, len );
+        return constructByInAndPostOrder(0, len);
     }
 
     private TreeNode constructByInAndPostOrder(int start, int end) {
@@ -308,10 +308,13 @@ public class _100To200 {
 
 
     // 152. 乘积最大子数组
-    /** 考虑到乘积可能会有负负得正的情况，我们需要保留前面的最大值maxDP和最小值minDP。
-     从左到右迭代数组，对于每个位置，它的最大值和最小值只能从maxDP[i-1] * nums[i]、minDP[i-1] * nums[i]或nums[i]三者中产生。
-     因此，我们可以使用动态规划的方法来记录到目前位置的最大值和最小值。
-     最后的结果是所有maxDP中的最大值。*/
+
+    /**
+     * 考虑到乘积可能会有负负得正的情况，我们需要保留前面的最大值maxDP和最小值minDP。
+     * 从左到右迭代数组，对于每个位置，它的最大值和最小值只能从maxDP[i-1] * nums[i]、minDP[i-1] * nums[i]或nums[i]三者中产生。
+     * 因此，我们可以使用动态规划的方法来记录到目前位置的最大值和最小值。
+     * 最后的结果是所有maxDP中的最大值。
+     */
     public int maxProduct(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
 
@@ -336,6 +339,40 @@ public class _100To200 {
         return result;
     }
 
+    // 153. 寻找旋转排序数组中的最小值 【二分】
+    public int findMin(int[] nums) {
+        int len = nums.length;
+        if (len == 1) return nums[0];
+        int left = 0;
+        int right = len - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left];
+    }
+
+    // 162. 寻找峰值
+    public int findPeakElement(int[] nums) {
+        int len = nums.length;
+        int left = 0;
+        int right = len - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[mid + 1]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
 
     // 160. 相交链表 [hashList，]
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
