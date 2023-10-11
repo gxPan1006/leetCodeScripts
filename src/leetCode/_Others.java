@@ -209,6 +209,25 @@ public class _Others {
         }
     }
 
+    // 322. 零钱兑换
+    /** 使用（当前金额-币值的金额选择 ）+ 1 和当前值比较
+     * 当前值初始值设置为amount+1表示组成失败*/
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+
 
     // 383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
