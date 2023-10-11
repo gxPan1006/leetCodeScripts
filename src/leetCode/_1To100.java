@@ -703,6 +703,59 @@ public class _1To100 {
         }
     }
 
+    // 74. 搜索二维矩阵
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
+        int top = 0;
+        int bottom = rows - 1;
+        while (top <= bottom) { // 注意这里是<=
+            int mid = top + (bottom - top) / 2;
+            if (target >= matrix[mid][0] && (mid == rows - 1 || target < matrix[mid + 1][0]))  {
+                int left = 0;
+                int right = columns - 1;
+                while (left <= right) { // 注意这里是<=
+                    int mid2 = left + (right - left) / 2;
+                    if (target == matrix[mid][mid2]) return true;
+                    else if (target > matrix[mid][mid2]) {
+                        left = mid2 + 1;
+                    } else {
+                        right = mid2 - 1;
+                    }
+                }
+                return false; // 在当前行中没有找到目标值
+            }
+            else if (mid < rows - 1 && target >= matrix[mid + 1][0]) {
+                top = mid + 1;
+            } else {
+                bottom = mid - 1;
+            }
+        }
+        return false;
+    }
+    // 拉平处理，二维数组和一维数组的转化
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+        int m = matrix.length, n = matrix[0].length;
+        int left = 0, right = m * n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int midValue = matrix[mid / n][mid % n];
+            if (midValue == target) {
+                return true;
+            } else if (midValue < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+
     // 80. 删除有序数组中的重复项 [0,0,1,1,1,2,2,3,3,4]
     // 我们可以让指针 i 遍历整个数组。
     // 初始时，我们将 j 设置为2（因为前两个元素总是有效的）。
