@@ -1,6 +1,7 @@
 package leetCode;
 
 import dataStructure.InsertSort;
+import dataStructure.Tree;
 import dataStructure.basic.ListNode;
 import dataStructure.basic.TreeNode;
 
@@ -84,6 +85,48 @@ public class _100To200 {
         constructByInAndPostOrder(idxInInOrder + 1, end);
         constructByInAndPostOrder(start, idxInInOrder);
         return root;
+    }
+
+    // 114. 二叉树展开为链表
+    // 深度遍历的递归实现
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode leftNode = root.left;
+        TreeNode rightNode = root.right;
+
+        root.left = null;
+        root.right = leftNode;
+
+        TreeNode temp = root;
+        while (temp.right != null) {
+            temp = temp.right;
+        }
+        temp.right = rightNode;
+    }
+
+    // 深度遍历的栈的实现
+    public void flatten2(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode current = stack.pop();
+
+            if (current.right != null) {
+                stack.push(current.right);
+            }
+            if (current.left != null) {
+                stack.push(current.left);
+            }
+            if (!stack.isEmpty()) {
+                current.right = stack.peek();
+            }
+            current.left = null;
+        }
     }
 
     // 121. 买卖股票 [动态规划] // TODO 动态规划
@@ -173,8 +216,11 @@ public class _100To200 {
     }
 
     // 139. 单词拆分
-    /** 如果 dp[j] 是 true 且 s[j,i]（j 到 i 的字符串片段）在 wordDict 中，那么 dp[i] 将是 true。
-     例如，如果 dp[j] 是 true，并且 "apple" 是我们的词典中的单词，那么 dp[j + len("apple")] 将是 true。*/
+
+    /**
+     * 如果 dp[j] 是 true 且 s[j,i]（j 到 i 的字符串片段）在 wordDict 中，那么 dp[i] 将是 true。
+     * 例如，如果 dp[j] 是 true，并且 "apple" 是我们的词典中的单词，那么 dp[j + len("apple")] 将是 true。
+     */
     public boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
         boolean[] dp = new boolean[n + 1];
@@ -466,7 +512,7 @@ public class _100To200 {
         int maxMoney = Math.max(dp[0], dp[1]);
 
         for (int i = 2; i < len; i++) {
-            dp[i] = Math.max(dp[i-1], dp[i-2]+nums[i]);
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
             maxMoney = Math.max(maxMoney, dp[i]);
         }
 

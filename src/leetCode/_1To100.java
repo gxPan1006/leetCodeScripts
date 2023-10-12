@@ -415,10 +415,13 @@ public class _1To100 {
     }
 
     // 33. 搜索旋转排序数组
-    /** 使用二分查找定位旋转点。
-     使用旋转点将数组分为两个有序的子数组。
-     根据目标值与子数组的边界值的关系，确定应在哪个子数组中继续二分查找。
-     在选定的子数组中使用二分查找查找目标值。*/
+
+    /**
+     * 使用二分查找定位旋转点。
+     * 使用旋转点将数组分为两个有序的子数组。
+     * 根据目标值与子数组的边界值的关系，确定应在哪个子数组中继续二分查找。
+     * 在选定的子数组中使用二分查找查找目标值。
+     */
     public int search(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return -1;
@@ -464,13 +467,15 @@ public class _1To100 {
     }
 
     // 34. 在排序数组中查找元素的第一个和最后一个位置
-    /** 在第一次二分查找中，你寻找左边小于target但自身等于target的元素。这样可以找到起始位置。
-     在第二次二分查找中，你寻找右边大于target但自身等于target的元素。这样可以找到结束位置。
+
+    /**
+     * 在第一次二分查找中，你寻找左边小于target但自身等于target的元素。这样可以找到起始位置。
+     * 在第二次二分查找中，你寻找右边大于target但自身等于target的元素。这样可以找到结束位置。
      */
     public int[] searchRange(int[] nums, int target) {
         int start = findStart(nums, target);
         int end = findEnd(nums, target);
-        return new int[] {start, end};
+        return new int[]{start, end};
     }
 
     private int findStart(int[] nums, int target) {
@@ -561,6 +566,31 @@ public class _1To100 {
             }
         }
         return steps;
+    }
+
+    // 46. 全排列
+    public List<List<Integer>> permute(int[] nums) {
+        ArrayList<List<Integer>> ans = new ArrayList<>();
+
+        boolean[] used = new boolean[nums.length];
+        sort(nums, ans, new ArrayList<>(), used);
+        return ans;
+    }
+
+    private void sort(int[] nums, ArrayList<List<Integer>> ans, ArrayList<Integer> path, boolean[] used) {
+        if (path.size() == nums.length) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (!used[i]) {
+                path.add(nums[i]);
+                used[i] = true;
+                sort(nums, ans, path, used);
+                used[i] = false;
+                path.remove(path.size() - 1);
+            }
+        }
     }
 
     // 48. 旋转图像
@@ -749,14 +779,14 @@ public class _1To100 {
 
         // 初始化第0列
         for (int i = 1; i < m; i++) {
-            if (obstacleGrid[i][0] == 0 && dp[i-1][0] == 1) {
+            if (obstacleGrid[i][0] == 0 && dp[i - 1][0] == 1) {
                 dp[i][0] = 1;
             }
         }
 
         // 初始化第0行
         for (int j = 1; j < n; j++) {
-            if (obstacleGrid[0][j] == 0 && dp[0][j-1] == 1) {
+            if (obstacleGrid[0][j] == 0 && dp[0][j - 1] == 1) {
                 dp[0][j] = 1;
             }
         }
@@ -765,12 +795,12 @@ public class _1To100 {
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
                 if (obstacleGrid[i][j] == 0) {
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
                 }
             }
         }
 
-        return dp[m-1][n-1];
+        return dp[m - 1][n - 1];
     }
 
     // 64. 最小路径和
@@ -783,23 +813,23 @@ public class _1To100 {
         dp[0][0] = grid[0][0];
 
         // 初始化第0列
-        for(int i = 1; i < m; i++) {
-            dp[i][0] = dp[i-1][0] + grid[i][0];
+        for (int i = 1; i < m; i++) {
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
         }
 
         // 初始化第0行
-        for(int j = 1; j < n; j++) {
-            dp[0][j] = dp[0][j-1] + grid[0][j];
+        for (int j = 1; j < n; j++) {
+            dp[0][j] = dp[0][j - 1] + grid[0][j];
         }
 
         // 逐个计算其他点的最小路径和
-        for(int i = 1; i < m; i++) {
-            for(int j = 1; j < n; j++) {
-                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
             }
         }
 
-        return dp[m-1][n-1];
+        return dp[m - 1][n - 1];
     }
 
 
@@ -1015,17 +1045,17 @@ public class _1To100 {
         dp[0][0] = true;
 
         for (int i = 1; i <= len1; i++) {
-            dp[i][0] = dp[i-1][0] && s1.charAt(i-1) == s3.charAt(i-1);
+            dp[i][0] = dp[i - 1][0] && s1.charAt(i - 1) == s3.charAt(i - 1);
         }
 
         for (int j = 1; j <= len2; j++) {
-            dp[0][j] = dp[0][j-1] && s2.charAt(j-1) == s3.charAt(j-1);
+            dp[0][j] = dp[0][j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);
         }
 
         for (int i = 1; i <= len1; i++) {
             for (int j = 1; j <= len2; j++) {
-                dp[i][j] = (dp[i-1][j] && s1.charAt(i-1) == s3.charAt(i+j-1)) ||
-                        (dp[i][j-1] && s2.charAt(j-1) == s3.charAt(i+j-1));
+                dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1)) ||
+                        (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));
             }
         }
 
